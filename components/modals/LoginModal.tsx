@@ -3,6 +3,7 @@ import useLoginModal from '../../hooks/useLoginModal';
 import Input from '../Input';
 import Modal from '../Modal';
 import useRegisterModal from '../../hooks/useRegisterModal';
+import { signIn } from 'next-auth/react';
 
 const LoginModal = () => {
 
@@ -28,7 +29,10 @@ const onSubmit = useCallback(async () => {
     try{
         setIsLoading(true);
 
-        //TODO ADD LOGIN 
+        await signIn('credentials', {
+          email,
+          password  
+        }) 
 
         loginModal.onClose();
     } catch (error) {
@@ -36,7 +40,7 @@ const onSubmit = useCallback(async () => {
     } finally {
         setIsLoading(false);
     }
-}, [loginModal])
+}, [loginModal, email, password])
 
 const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -48,6 +52,7 @@ const bodyContent = (
         />
         <Input
         placeholder='Password'
+        type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
         disabled={isLoading}
