@@ -18,7 +18,7 @@ const Sidebar = () => {
       icon: BsHouseFill,
     },
     {
-      label: "Notificaions",
+      label: "Notifications",
       href: "/notifications",
       icon: BsBellFill,
       auth: true,
